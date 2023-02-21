@@ -1,0 +1,31 @@
+from collections import deque 
+ 
+# Количество дисков  
+n = 5   
+ 
+# Размеры дисков  
+disks = deque([5,4,3,2,1]) 
+ 
+# Стеки (source, auxiliary, target) 
+source = deque() 
+auxiliary = deque() 
+target = deque() 
+ 
+# Перенос дисков с исходного стека на целевой стек 
+def move_disks(n, source, auxiliary, target):  
+    if n > 0: 
+        # Перенести n − 1 дисков с исходного стека на вспомогательный 
+        move_disks(n-1, source, target, auxiliary)  
+ 
+        # Перенести нижний диск с исходного стека на целевой стек 
+        target.append(source.pop())  
+ 
+        # Перенести n − 1 дисков с вспомогательного стека на целевой 
+        move_disks(n-1, auxiliary, source, target)  
+ 
+# Начало переноса
+move_disks(n, disks, auxiliary, target)
+print(disks) 
+print(source) 
+print(auxiliary) 
+print(target)
